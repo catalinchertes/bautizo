@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Botezul lui Milan - Te așteptăm</title>
+
+  <!-- Meta tags para compartir -->
+  <meta property="og:title" content="Botezul lui Milan - Te invităm să sărbătorim" />
+  <meta property="og:description" content="Cu harul lui Dumnezeu, te invităm să sărbătorim botezul micuțului nostru Milan. Te așteptăm cu inima deschisă!" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=1200" />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css?family=Great+Vibes&family=Lato:300,400,600&subset=latin,latin-ext&display=swap" rel="stylesheet">
+
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root{
+      --color-primary:#586a58;
+      --color-secondary:#e1e0df;
+      --color-accent:#8b9383;
+      --color-gold:#7b7966;
+      --color-text-dark:#3e3f2a;
+      --color-white:#ffffff;
+      --color-overlay:rgba(225,224,223,.95);
+      --shadow-soft: 0 10px 26px rgba(0,0,0,.08);
+      --border-soft: 1px solid rgba(88, 106, 88, .18);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+
+    /* Fondo fijo para TODA la página */
+    body{
+      font-family: "Lato","Noto Sans",Arial,sans-serif;
+      color:var(--color-text-dark);
+      background:transparent;
+      overflow-x:hidden;
+      line-height:1.6;
+      position:relative;
+      min-height:100vh;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      background-image:
+        linear-gradient(rgba(225, 224, 223, 0.801), rgba(225,224,223,.88)),
+        url("assets/background.jpg");
+      background-position:top center;
+      background-repeat:repeat-y;
+      background-size:min(1150px, 100%) auto;
+    }
+
+    /* Canvas de confeti */
+    #confetti-canvas{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      pointer-events:none;
+      z-index:10;
+    }
+
+    /* Selector de idioma (compacto con banderas) */
+    .language-selector{
+      position:fixed;
+      top:16px;
+      right:16px;
+      z-index:1200;
+      background:rgba(255,255,255,.7);
+      border: var(--border-soft);
+      border-radius:999px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+      padding:6px;
+      display:flex;
+      gap:6px;
+    }
+
+    .lang-btn{
+      appearance:none;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      padding:8px 10px;
+      border-radius:999px;
+      font-weight:600;
+      color:var(--color-text-dark);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      line-height:1;
+      font-size:12px;
+      transition: background .2s ease, transform .2s ease;
+      user-select:none;
+    }
+
+    .lang-btn .flag{font-size:14px;}
+    .lang-btn:hover{background:rgba(88,106,88,.10); transform: translateY(-1px);}
+    .lang-btn.active{background:rgba(88,106,88,.16);}
+
+    /* Hero */
+        .hero{
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;        /* centra en vertical */
+    justify-content: center;    /* centra en horizontal */
+    padding: 30px 20px 78px;    /* deja hueco para la flecha */
+    position: relative;
+    background: transparent;
+    }
+
+
+    .hero-content{
+      text-align:center;
+      max-width:900px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp{
+      from{opacity:0; transform:translateY(22px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+
+    .hero-image{
+      width:230px;
+      height:230px;
+      border-radius:50%;
+      object-fit:cover;
+      border:8px solid var(--color-white);
+      box-shadow: 0 10px 40px rgba(0,0,0,.15);
+      margin-bottom:18px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .hero-title{
+      font-family:'Great Vibes',cursive;
+      font-size:clamp(3rem, 8vw, 5rem);
+      color:var(--color-primary);
+      margin-bottom: 10px;
+      line-height:1.1;
+    }
+
+    .divider{
+      width:80px;
+      height:2px;
+      background:linear-gradient(to right, transparent, var(--color-primary), transparent);
+      margin: 18px auto;
+    }
+
+    .hero-subtitle{
+      font-size: clamp(0.95rem, 2.8vw, 1.15rem);
+      font-weight:300;
+      color:var(--color-text-dark);
+      max-width:760px;
+      margin: 0 auto 50px;
+      line-height:1.7;
+    }
+
+    .hero-date{
+      font-size: clamp(1.02rem, 3vw, 1.3rem);
+      font-weight:600;
+      color:var(--color-gold);
+      margin-top: 14px;
+    }
+
+    /* Countdown (siempre 4 columnas; compacta en móvil) */
+    .hero-countdown{margin: 0 auto 6px; max-width: 820px;}
+    .hero-countdown-title{
+      font-weight:400;
+      letter-spacing:.2px;
+      margin: 6px 0 10px;
+      color:var(--color-text-dark);
+      opacity:.95;
+      font-size: clamp(.92rem, 2.4vw, 1.12rem);
+    }
+
+    .hero-timer{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(64px, 1fr));
+      gap: 10px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .hero-timer-item{
+      padding: 12px 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.55);
+      border: var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-timer-value{
+      display:block;
+      font-size: clamp(1.4rem, 5vw, 2.05rem);
+      font-weight:600;
+      color: var(--color-primary);
+      line-height:1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hero-timer-label{
+      display:block;
+      margin-top: 6px;
+      font-size: .66rem;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--color-text-dark);
+      opacity: .8;
+      white-space: nowrap;
+    }
+
+    /* Flecha siempre visible */
+    .scroll-indicator{
+      position: fixed;
+      left:50%;
+      bottom: calc(14px + env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      z-index: 1100;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.68);
+      border: var(--border-soft);
+      display:grid;
+      place-items:center;
+      color: var(--color-primary);
+      text-decoration:none;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+      animation: bounce 1.6s infinite;
+      transition: opacity 240ms ease, transform 240ms ease;
+      will-change: opacity, transform;
+    }
+    .scroll-indicator:hover{
+      transform: translateX(-50%) translateY(-2px);
+      background: rgba(255,255,255,.78);
+    }
+    @keyframes bounce{
+      0%,100%{ transform: translateX(-50%) translateY(0); }
+      50%{ transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* Secciones */
+    section{
+      padding: 56px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    /* Para que "Detalles" aparezca antes */
+    #detalles{ padding-top: 20px; }
+
+    .section-title{
+      font-family:'Great Vibes',cursive;
+      font-size: clamp(2.3rem, 6vw, 3.3rem);
+      color: var(--color-primary);
+      text-align:center;
+      margin-bottom: 34px;
+    }
+
+    /* Cards */
+    .card{
+      background: rgba(255,255,255,.85);
+      border-radius: 20px;
+      padding: 34px 26px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.08);
+      border: 1px solid rgba(0,0,0,.04);
+      backdrop-filter: blur(10px);
+    }
+
+    .event-details .detail-card{
+      margin-bottom: 28px;
+      text-align:center;
+    }
+    .event-details .detail-card:last-child{ margin-bottom: 0; }
+
+    .detail-icon{
+      font-size: 2.6rem;
+      color: var(--color-primary);
+      margin-bottom: 14px;
+    }
+
+    .detail-title{
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      margin-bottom: 10px;
+    }
+
+    .detail-content{
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--color-text-dark);
+    }
+
+    .detail-content strong{
+      display:block;
+      margin-top: 8px;
+      font-weight: 700;
+    }
+
+    .map-link{
+      display:inline-block;
+      margin-top: 14px;
+      padding: 11px 22px;
+      background: var(--color-primary);
+      color: var(--color-white);
+      text-decoration:none;
+      border-radius: 999px;
+      transition: all .25s ease;
+      font-weight: 600;
+    }
+    .map-link:hover{
+      background: var(--color-accent);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0,0,0,.12);
+    }
+
+    /* Mensaje */
+    .message-content{
+      font-size: 1.15rem;
+      line-height: 1.95;
+      text-align:center;
+      max-width: 860px;
+      margin: 0 auto;
+      color: var(--color-text-dark);
+    }
+
+    /* Galería */
+    .gallery-grid{
+      display:flex;
+      justify-content:center;
+      gap: 14px;
+      margin-top: 22px;
+      flex-wrap: nowrap;
+    }
+    .gallery-item{
+      position:relative;
+      border-radius: 14px;
+      overflow:hidden;
+      width: 220px;
+      height: 220px;
+      flex: 0 0 220px;
+      box-shadow: 0 8px 25px rgba(0,0,0,.10);
+      transition: transform .25s ease, box-shadow .25s ease;
+      cursor:pointer;
+      background:#fff;
+    }
+    .gallery-item:hover{ transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,.18); }
+    .gallery-item img{ width:100%; height:100%; object-fit:cover; transition: transform .45s ease; }
+    .gallery-item:hover img{ transform: scale(1.06); }
+
+    .scroll-indicator.is-hidden{
+    opacity: 0;
+    transform: translateX(-50%) translateY(16px); /* “hacia abajo” */
+    pointer-events: none;
+    }
+
+    /* RSVP estilo “líneas” (como tu imagen) */
+    .rsvp-wrap{ max-width: 520px; margin: 0 auto; }
+    .rsvp-form{
+      background: rgba(255,255,255,.88);
+      border-radius: 18px;
+      padding: 22px 18px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.10);
+      border: 1px solid rgba(0,0,0,.05);
+      backdrop-filter: blur(10px);
+    }
+
+    .rsvp-block{ margin-bottom: 16px; }
+
+    .rsvp-radio-row{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .rsvp-radio{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      cursor:pointer;
+      user-select:none;
+      width: 100%;
+    }
+
+    .rsvp-radio input{ accent-color: var(--color-primary); width: 18px; height: 18px; }
+
+    .rsvp-radio span{
+      font-weight: 700;
+      color: var(--color-text-dark);
+      font-size: 0.98rem;
+    }
+
+    .rsvp-label{
+      font-weight: 800;
+      color: var(--color-text-dark);
+      font-size: .95rem;
+      margin: 12px 0 6px;
+    }
+
+    .line-input{
+      width:100%;
+      border:0;
+      border-bottom: 1px solid rgba(0,0,0,.25);
+      background: transparent;
+      padding: 10px 2px 8px;
+      font-size: 1rem;
+      outline: none;
+      color: var(--color-text-dark);
+    }
+    .line-input::placeholder{ color: rgba(0,0,0,.35); }
+
+    textarea.line-input{
+      resize: vertical;
+      min-height: 60px;
+      padding-top: 10px;
+    }
+
+    .menu-row{
+      display:flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .menu-option{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      cursor:pointer;
+      user-select:none;
+      font-weight: 700;
+      color: var(--color-text-dark);
+    }
+    .menu-option input{ accent-color: var(--color-primary); width: 18px; height: 18px; }
+
+    .submit-btn{
+      width:100%;
+      margin-top: 10px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+      color: var(--color-white);
+      border: 0;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .submit-btn:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(88,106,88,.25); }
+
+    .form-message{
+      margin-top: 14px;
+      padding: 12px 12px;
+      border-radius: 12px;
+      text-align:center;
+      display:none;
+      font-weight: 700;
+    }
+    .form-message.success{ background:#d4edda; color:#155724; display:block; }
+    .form-message.error{ background:#f8d7da; color:#721c24; display:block; }
+
+    /* Footer */
+    footer{
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+      color: var(--color-white);
+      padding: 56px 20px 36px;
+      text-align:center;
+    }
+    .footer-content{ max-width: 820px; margin: 0 auto; }
+    .footer-title{
+      font-family:'Great Vibes',cursive;
+      font-size: 2.5rem;
+      margin-bottom: 18px;
+    }
+    .footer-text{ font-size: 1.05rem; line-height: 1.8; margin-bottom: 22px; }
+    .footer-names{
+      font-size: 1rem;
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.3);
+    }
+    .footer-names strong{ display:block; margin-bottom: 8px; font-size: 1.1rem; }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .gallery-grid{
+        overflow-x:auto;
+        justify-content:flex-start;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+      }
+    }
+
+    @media (max-width: 768px){
+      section{ padding: 46px 18px; }
+      #detalles{ padding-top: 14px; }
+
+      .hero{
+        padding: 14px 16px 44px;
+      }
+      .hero-image{
+        width: 175px;
+        height: 175px;
+        margin-bottom: 12px;
+      }
+      .divider{ margin: 14px auto; }
+      .hero-subtitle{ margin-bottom: 50px; }
+      .hero-date{ margin-top: 12px; }
+
+      .hero-timer{
+        gap: 8px;
+        max-width: 100%;
+        grid-template-columns: repeat(4, minmax(58px, 1fr));
+      }
+      .hero-timer-item{ padding: 10px 8px; border-radius: 12px; }
+      .hero-timer-label{ font-size: .60rem; }
+
+      .language-selector{ top: 12px; right: 12px; padding: 5px; gap: 5px; }
+      .lang-btn{ padding: 7px 9px; font-size: 12px; }
+    }
+
+    @media (max-width: 360px){
+      .hero-timer{
+        grid-template-columns: repeat(4, minmax(52px, 1fr));
+        gap: 6px;
+      }
+      .hero-timer-value{ font-size: 1.25rem; }
+      .hero-timer-label{ font-size: .58rem; }
+    }
+
+    @keyframes float{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-10px); }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Language selector -->
+  <div class="language-selector" aria-label="Selector de idioma">
+    <button type="button" class="lang-btn active" data-lang="ro" aria-label="Română">
+      <span class="flag">🇷🇴</span>
+    </button>
+    <button type="button" class="lang-btn" data-lang="es" aria-label="Español">
+      <span class="flag">🇪🇸</span>
+    </button>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="hero-content">
+      <img src="./assets/bebe.jpg" alt="Milan" class="hero-image" />
+      <h1 class="hero-title" data-translate="heroName">Milan</h1>
+      <div class="divider"></div>
+
+      <p class="hero-subtitle" data-translate="heroSubtitle">
+        Acum este timpul să devin un băiat botezat și răsfățat de toată lumea! Vă aștept la petrecere!
+      </p>
+
+      <div class="hero-countdown" aria-label="Numărătoare inversă până la botez">
+        <div class="hero-countdown-title" data-translate="heroCountdownTitle">Mai sunt...</div>
+        <div class="hero-timer" role="group" aria-label="Timp rămas">
+          <div class="hero-timer-item">
+            <span class="hero-timer-value" id="days">00</span>
+            <span class="hero-timer-label" data-translate="countdownDays">Zile</span>
+          </div>
+          <div class="hero-timer-item">
+            <span class="hero-timer-value" id="hours">00</span>
+            <span class="hero-timer-label" data-translate="countdownHours">Ore</span>
+          </div>
+          <div class="hero-timer-item">
+            <span class="hero-timer-value" id="minutes">00</span>
+            <span class="hero-timer-label" data-translate="countdownMinutes">Minute</span>
+          </div>
+          <div class="hero-timer-item">
+            <span class="hero-timer-value" id="seconds">00</span>
+            <span class="hero-timer-label" data-translate="countdownSeconds">Secunde</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="hero-date" data-translate="heroDate">25 aprilie 2026</p>
+    </div>
+
+    <a class="scroll-indicator" href="#detalles" aria-label="Derulează în jos">
+      <i class="fas fa-chevron-down"></i>
+    </a>
+  </section>
+
+  <!-- Detalles -->
+  <section id="detalles">
+    <h2 class="section-title" data-translate="detailsTitle">Detalii eveniment</h2>
+
+    <div class="event-details card">
+      <!-- Fecha -->
+      <div class="detail-card">
+        <div class="detail-icon"><i class="fas fa-calendar-alt"></i></div>
+        <h3 class="detail-title" data-translate="dateTitle">Data</h3>
+        <p class="detail-content">
+          <span data-translate="dateDay">Sâmbătă, 25 aprilie 2026</span>
+        </p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Iglesia -->
+      <div class="detail-card">
+        <div class="detail-icon"><i class="fas fa-church"></i></div>
+        <h3 class="detail-title" data-translate="churchTitle">Biserică</h3>
+        <p class="detail-content">
+          <strong data-translate="churchName">Biserica Ortodoxa "Nașterea Sf. Ioan Botezătorul"</strong>
+          <strong data-translate="churchTime">16:00h</strong>
+        </p>
+
+        <a href="https://maps.app.goo.gl/wDUpYaMd942iLFYj9" target="_blank" class="map-link" rel="noopener" data-translate="mapLinkChurch">
+          <i class="fas fa-map-marker-alt"></i> Vezi pe Google Maps
+        </a>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Restaurante -->
+      <div class="detail-card">
+        <div class="detail-icon"><i class="fas fa-utensils"></i></div>
+        <h3 class="detail-title" data-translate="receptionTitle">Restaurant</h3>
+        <p class="detail-content">
+          <strong data-translate="receptionVenue">La Villa Ballroom Maria Events</strong>
+          <strong data-translate="receptionTime">18:00h</strong>
+        </p>
+
+        <a href="https://maps.app.goo.gl/uvqRoRvHHkR28pqH8" target="_blank" class="map-link" rel="noopener" data-translate="mapLinkReception">
+          <i class="fas fa-map-marker-alt"></i> Vezi pe Google Maps
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Mensaje -->
+  <section id="mensaje">
+    <h2 class="section-title" data-translate="messageTitle">Un mesaj din inimă</h2>
+    <div class="card">
+      <p class="message-content" data-translate="messageContent">
+        Vă aștept cu mic, cu mare, în ziua de sărbătoare, la prima mea baie creștină, urmată de petrecere cu zâmbete, gângureli și bucurie!
+      </p>
+    </div>
+  </section>
+
+  <!-- Galería -->
+  <section id="galeria">
+    <h2 class="section-title" data-translate="galleryTitle">Momente speciale</h2>
+    <div class="gallery-grid" aria-label="Galerie foto">
+      <div class="gallery-item"><img src="assets/Milan-1-3.jpg" alt="Foto 1" /></div>
+      <div class="gallery-item"><img src="assets/Milan-1-2.jpg" alt="Foto 2" /></div>
+      <div class="gallery-item"><img src="assets/Milan-1.jpg" alt="Foto 3" /></div>
+      <div class="gallery-item"><img src="assets/Milan-4.jpg" alt="Foto 4" /></div>
+    </div>
+  </section>
+
+<!-- RSVP -->
+<section id="rsvp">
+    <h2 class="section-title" data-translate="rsvpTitle">Confirmă prezența</h2>
+  
+    <div class="rsvp-wrap">
+      <form
+        class="rsvp-form"
+        id="rsvpForm"
+        action="https://script.google.com/macros/s/AKfycbwVQkMegn5ZpSiWi7VWC_GEfcWUR1zIQIPBAs2AfLVYwB1gBNNgtVB54mg96f40tIzz/exec"
+        method="POST"
+        target="rsvp_iframe"
+      >
+        <!-- Seguridad simple anti-spam (debe coincidir con Script Properties SECRET) -->
+        <input type="hidden" name="secret" value="K9vP3mA7qZ!tR2#xF8sL0wB@hD4uN6eC$yQ5jT1pG%rV" />
+  
+        <!-- Idioma actual (rellénalo desde tu JS: langField.value = currentLang) -->
+        <input type="hidden" name="lang" id="langField" value="ro" />
+  
+        <div class="rsvp-block">
+          <label class="rsvp-radio">
+            <input type="radio" name="attendance" id="attendYes" value="yes" checked />
+            <span data-translate="attendYes">Accept cu mare drag</span>
+          </label>
+        </div>
+  
+        <div class="rsvp-block">
+          <label class="rsvp-radio">
+            <input type="radio" name="attendance" id="attendNo" value="no" />
+            <span data-translate="attendNo">Îmi pare rău, dar nu pot participa</span>
+          </label>
+        </div>
+  
+        <div class="rsvp-block">
+          <div class="rsvp-label" data-translate="nameLabel">Numele tău</div>
+          <input
+            class="line-input"
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="Prenume Nume"
+            data-translate-placeholder="namePlaceholder"
+          />
+        </div>
+  
+        <!-- Estos campos se ocultan y se DESHABILITAN si elige "no" (no se envían) -->
+        <div id="rsvpExtra">
+          <div class="rsvp-block">
+            <div class="rsvp-label" data-translate="partnerLabel">Vei veni însoțit?</div>
+            <input
+              class="line-input"
+              type="text"
+              id="partner"
+              name="partner"
+              placeholder="Numele partenerului/partenerei"
+              data-translate-placeholder="partnerPlaceholder"
+            />
+          </div>
+  
+          <div class="rsvp-block">
+            <div class="rsvp-label" data-translate="kidsLabel">Vei veni cu copii?</div>
+            <input
+              class="line-input"
+              type="number"
+              min="0"
+              id="kids"
+              name="kids"
+              placeholder="Numărul de copii"
+              data-translate-placeholder="kidsPlaceholder"
+            />
+          </div>
+  
+          <div class="rsvp-block">
+            <div class="rsvp-label" data-translate="menuLabel">Meniu</div>
+            <div class="menu-row" role="group" aria-label="Meniu">
+              <label class="menu-option">
+                <input type="radio" name="menu" value="standard" checked />
+                <span data-translate="menuStandard">Standard</span>
+              </label>
+              <label class="menu-option">
+                <input type="radio" name="menu" value="vegetarian" />
+                <span data-translate="menuVegetarian">Vegetarian</span>
+              </label>
+            </div>
+          </div>
+  
+          <div class="rsvp-block">
+            <div class="rsvp-label" data-translate="allergiesLabel">
+              Alergii de care trebuie să știm sau alte necesități?
+            </div>
+            <textarea
+              class="line-input"
+              id="allergies"
+              name="allergies"
+              placeholder="Scrie-ne aici"
+              data-translate-placeholder="allergiesPlaceholder"
+            ></textarea>
+          </div>
+        </div>
+  
+        <button type="submit" class="submit-btn" data-translate="formSubmit">Trimite</button>
+        <div class="form-message" id="formMessage"></div>
+      </form>
+  
+      <!-- Iframe oculto para evitar redirección al enviar -->
+      <iframe name="rsvp_iframe" style="display:none"></iframe>
+    </div>
+  </section>
+  
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <h2 class="footer-title" data-translate="footerTitle">Vă așteptăm cu inima deschisă!</h2>
+      <p class="footer-text" data-translate="footerText">
+        Ne-ar face o mare bucurie să fiți alături de noi în această zi specială. Prezența voastră este cel mai frumos dar.
+      </p>
+      <div class="footer-names">
+        <p data-translate="footerParentsNames">Catalin si Bianca</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      ro: {
+        heroName: "Milan",
+        heroSubtitle: "Acum este timpul să devin un băiat botezat și răsfățat de toată lumea! Vă aștept la petrecere!",
+        heroCountdownTitle: "Mai sunt...",
+        heroDate: "25 aprilie 2026",
+  
+        detailsTitle: "Detalii eveniment",
+        dateTitle: "Data",
+        dateDay: "Sâmbătă, 25 aprilie 2026",
+  
+        churchTitle: "Biserică",
+        churchName: 'Biserica Ortodoxa "Nașterea Sf. Ioan Botezătorul"',
+        churchTime: "16:00h",
+        mapLinkChurch: "Vezi pe Google Maps",
+  
+        receptionTitle: "Restaurant",
+        receptionVenue: "La Villa Ballroom Maria Events",
+        receptionTime: "18:00h",
+        mapLinkReception: "Vezi pe Google Maps",
+  
+        countdownDays: "Zile",
+        countdownHours: "Ore",
+        countdownMinutes: "Minute",
+        countdownSeconds: "Secunde",
+  
+        messageTitle: "Un mesaj din inimă",
+        messageContent: "Vă aștept cu mic, cu mare, în ziua de sărbătoare, la prima mea baie creștină, urmată de petrecere cu zâmbete, gângureli și bucurie!",
+  
+        galleryTitle: "Momente speciale",
+  
+        rsvpTitle: "Confirmă prezența",
+        attendYes: "Accept cu mare drag",
+        attendNo: "Îmi pare rău, dar nu pot participa",
+        nameLabel: "Numele tău",
+        namePlaceholder: "Prenume Nume",
+        partnerLabel: "Vei veni însoțit?",
+        partnerPlaceholder: "Numele partenerului/partenerei",
+        kidsLabel: "Vei veni cu copii?",
+        kidsPlaceholder: "Numărul de copii",
+        menuLabel: "Meniu",
+        menuStandard: "Standard",
+        menuVegetarian: "Vegetarian",
+        allergiesLabel: "Alergii de care trebuie să știm sau alte necesități?",
+        allergiesPlaceholder: "Scrie-ne aici",
+        formSubmit: "Trimite",
+  
+        footerTitle: "Vă așteptăm cu inima deschisă!",
+        footerText: "Ne-ar face o mare bucurie să fiți alături de noi în această zi specială. Prezența voastră este cel mai frumos dar.",
+        footerParents: "Părinți:",
+        footerParentsNames: "Catalin si Bianca",
+  
+        rsvpSuccess: "Mulțumim! Confirmarea a fost trimisă.",
+        rsvpError: "A apărut o eroare. Te rugăm să încerci din nou."
+      },
+  
+      es: {
+        heroName: "Milan",
+        heroSubtitle: "¡Ha llegado el momento de bautizarme y ser mimado por todos! ¡Os espero en la celebración!",
+        heroCountdownTitle: "Faltan...",
+        heroDate: "25 de Abril, 2026",
+  
+        detailsTitle: "Detalles del evento",
+        dateTitle: "Fecha",
+        dateDay: "Sábado, 25 de Abril de 2026",
+  
+        churchTitle: "Iglesia",
+        churchName: 'Iglesia Ortodoxa Rumana "Nașterea Sf. Ioan Botezătorul"',
+        churchTime: "16:00h",
+        mapLinkChurch: "Ver en Google Maps",
+  
+        receptionTitle: "Restaurante",
+        receptionVenue: "La Villa Ballroom Maria Events",
+        receptionTime: "18:00h",
+        mapLinkReception: "Ver en Google Maps",
+  
+        countdownDays: "Días",
+        countdownHours: "Horas",
+        countdownMinutes: "Minutos",
+        countdownSeconds: "Segundos",
+  
+        messageTitle: "Un mensaje del corazón",
+        messageContent: "¡Os espero a todos, grandes y pequeños, en este día tan especial, seguido de una celebración llena de sonrisas y alegría!",
+  
+        galleryTitle: "Momentos especiales",
+  
+        rsvpTitle: "Confirma tu asistencia",
+        attendYes: "Acepto con mucho gusto",
+        attendNo: "Lo siento, pero no puedo asistir",
+        nameLabel: "Tu nombre",
+        namePlaceholder: "Nombre y apellidos",
+        partnerLabel: "¿Vendrás acompañado?",
+        partnerPlaceholder: "Nombre de tu pareja",
+        kidsLabel: "¿Vendrás con niños?",
+        kidsPlaceholder: "Número de niños",
+        menuLabel: "Menú",
+        menuStandard: "Estándar",
+        menuVegetarian: "Vegetariano",
+        allergiesLabel: "¿Alergias u otras necesidades?",
+        allergiesPlaceholder: "Escríbenos aquí",
+        formSubmit: "Enviar",
+  
+        footerTitle: "¡Os esperamos con el corazón abierto!",
+        footerText: "Será un honor compartir este día tan especial con vosotros. Vuestra presencia es el mejor regalo.",
+        footerParents: "Padres:",
+        footerParentsNames: "Catalin y Bianca",
+  
+        rsvpSuccess: "¡Gracias! La confirmación se ha enviado.",
+        rsvpError: "Hubo un error. Por favor, inténtalo de nuevo."
+      }
+    };
+  
+    let currentLang = "ro";
+  
+    function applyTranslations(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+  
+      document.querySelectorAll("[data-translate]").forEach(el => {
+        const key = el.getAttribute("data-translate");
+        if (translations[lang] && translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+  
+      document.querySelectorAll("[data-translate-placeholder]").forEach(el => {
+        const key = el.getAttribute("data-translate-placeholder");
+        if (translations[lang] && translations[lang][key]) {
+          el.setAttribute("placeholder", translations[lang][key]);
+        }
+      });
+  
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+      });
+  
+      // hidden lang para Apps Script
+      const langField = document.getElementById("langField");
+      if (langField) langField.value = lang;
+    }
+  
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.addEventListener("click", () => applyTranslations(btn.dataset.lang));
+    });
+  
+    applyTranslations("ro");
+  
+    // Confetti (suave)
+    const canvas = document.getElementById("confetti-canvas");
+    const ctx = canvas.getContext("2d");
+  
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+  
+    const confettiPieces = [];
+    const confettiCount = 18;
+    const colors = ["#586a58", "#8b9383", "#a1a993", "#a39993", "#7b7966", "#e1e0df", "#ffffff"];
+  
+    class ConfettiPiece {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height - canvas.height;
+        this.size = Math.random() * 5 + 2;
+        this.speed = Math.random() * 1.1 + 0.55;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.rotation = Math.random() * 360;
+        this.rotationSpeed = Math.random() * 2.2 - 1.1;
+      }
+      update() {
+        this.y += this.speed;
+        this.rotation += this.rotationSpeed;
+        if (this.y > canvas.height) {
+          this.y = -10;
+          this.x = Math.random() * canvas.width;
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = 0.42;
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation * Math.PI / 180);
+        ctx.fillStyle = this.color;
+        ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+        ctx.restore();
+      }
+    }
+  
+    for (let i = 0; i < confettiCount; i++) confettiPieces.push(new ConfettiPiece());
+  
+    function animateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confettiPieces.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateConfetti);
+    }
+    animateConfetti();
+    window.addEventListener("resize", resizeCanvas);
+  
+    // Cuenta atrás
+    const baptismDate = new Date("2026-04-25T16:00:00").getTime();
+    function updateCountdown() {
+      const now = Date.now();
+      const distance = baptismDate - now;
+  
+      const days = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
+      const hours = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+      const minutes = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+      const seconds = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000));
+  
+      document.getElementById("days").textContent = String(days).padStart(2, "0");
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  
+    // RSVP condicional: si "no" -> oculta + deshabilita (no se envía)
+    const attendYes = document.getElementById("attendYes");
+    const attendNo = document.getElementById("attendNo");
+    const rsvpExtra = document.getElementById("rsvpExtra");
+  
+    function setDisabled(container, disabled) {
+      container.querySelectorAll("input, select, textarea, button").forEach(el => {
+        el.disabled = disabled;
+      });
+    }
+  
+    function clearValues(container) {
+      container.querySelectorAll("input, select, textarea").forEach(el => {
+        if (el.type === "radio" || el.type === "checkbox") el.checked = false;
+        else el.value = "";
+      });
+    }
+  
+    function updateRsvpVisibility() {
+      const isNo = attendNo && attendNo.checked;
+  
+      if (rsvpExtra) {
+        rsvpExtra.style.display = isNo ? "none" : "block";
+        setDisabled(rsvpExtra, !!isNo);
+        if (isNo) clearValues(rsvpExtra);
+  
+        if (!isNo) {
+          const defaultMenu = rsvpExtra.querySelector('input[name="menu"][value="standard"]');
+          if (defaultMenu) defaultMenu.checked = true;
+        }
+      }
+    }
+  
+    if (attendYes) attendYes.addEventListener("change", updateRsvpVisibility);
+    if (attendNo) attendNo.addEventListener("change", updateRsvpVisibility);
+    updateRsvpVisibility();
+  
+    // Envío real a Apps Script (via iframe target)
+    const rsvpForm = document.getElementById("rsvpForm");
+    const formMessage = document.getElementById("formMessage");
+    const iframe = document.querySelector('iframe[name="rsvp_iframe"]');
+  
+    let pendingSubmit = false;
+    let submitTimeout = null;
+  
+    function showStatus(type, text) {
+      if (!formMessage) return;
+      formMessage.textContent = text;
+      formMessage.className = "form-message " + type;
+    }
+  
+    if (rsvpForm) {
+      rsvpForm.addEventListener("submit", () => {
+        pendingSubmit = true;
+  
+        // asegúrate de enviar el idioma actual
+        const langField = document.getElementById("langField");
+        if (langField) langField.value = currentLang;
+  
+        // Mensaje inmediato (puedes cambiarlo si quieres “Enviando…”)
+        showStatus("success", translations[currentLang].rsvpSuccess);
+  
+        // Fallback error si el iframe no carga (red/blocked)
+        if (submitTimeout) clearTimeout(submitTimeout);
+        submitTimeout = setTimeout(() => {
+          if (!pendingSubmit) return;
+          pendingSubmit = false;
+          showStatus("error", translations[currentLang].rsvpError);
+        }, 12000);
+      });
+    }
+  
+    if (iframe) {
+      iframe.addEventListener("load", () => {
+        if (!pendingSubmit) return;
+        pendingSubmit = false;
+  
+        if (submitTimeout) {
+          clearTimeout(submitTimeout);
+          submitTimeout = null;
+        }
+  
+        showStatus("success", translations[currentLang].rsvpSuccess);
+  
+        if (rsvpForm) rsvpForm.reset();
+        if (attendYes) attendYes.checked = true;
+        if (attendNo) attendNo.checked = false;
+        updateRsvpVisibility();
+  
+        setTimeout(() => {
+          if (!formMessage) return;
+          formMessage.className = "form-message";
+          formMessage.textContent = "";
+        }, 4500);
+      });
+    }
+  
+    // Smooth scroll anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", (e) => {
+        const target = document.querySelector(a.getAttribute("href"));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  
+    // Flecha: desaparece al bajar como en el chat
+    const arrow = document.querySelector(".scroll-indicator");
+    const HIDE_AFTER_PX = 40;
+  
+    function updateArrowByScroll() {
+      if (!arrow) return;
+      if (window.scrollY > HIDE_AFTER_PX) arrow.classList.add("is-hidden");
+      else arrow.classList.remove("is-hidden");
+    }
+  
+    if (arrow) {
+      arrow.addEventListener("click", () => {
+        arrow.classList.add("is-hidden");
+      }, { passive: true });
+    }
+  
+    window.addEventListener("scroll", updateArrowByScroll, { passive: true });
+    window.addEventListener("resize", updateArrowByScroll);
+    updateArrowByScroll();
+  </script>
+  
+</body>
+</html>
